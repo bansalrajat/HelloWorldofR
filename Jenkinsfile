@@ -121,6 +121,7 @@ spec:
               Rscript  -e "rmarkdown::render('Linting.Rmd')"
               Rscript  -e "rmarkdown::render('Coverage.Rmd')"
               Rscript  -e "rmarkdown::render('Rcmdcheck.Rmd')"
+              Rscript  -e "rmarkdown::render('CycloComp.Rmd')"
               
               #Rscript  -e 'rcmdcheck::rcmdcheck()'
               #Rscript  -e 'covr::package_coverage()'
@@ -136,7 +137,7 @@ spec:
              includes: '**/*.html', 
              keepAll: true, 
              reportDir: '.', 
-             reportFiles: 'Linting.html , Coverage.html , Rcmdcheck.html', 
+             reportFiles: 'Linting.html , Coverage.html , Rcmdcheck.html , CycloComp.html', 
              reportName: 'HTML Report', reportTitles: ''
              ])
 
