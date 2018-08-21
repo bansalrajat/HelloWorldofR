@@ -109,7 +109,8 @@ spec:
         }
       }
     }
-    stage('Check style') {
+
+    stage('Linting') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
           container('jnlp') {
