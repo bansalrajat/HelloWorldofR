@@ -47,7 +47,7 @@ spec:
     runAsUser: 0
   containers:
   - name: r
-    image: registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/ds/rocker/packrat:3.5.0
+    image: registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/ds/rocker/packrat:latest
     imagePullPolicy: IfNotPresent
     command:
     - cat
@@ -116,7 +116,7 @@ spec:
           container('r') {
             sh '''
               echo "Check style"
-              
+
               Rscript --default-packages=lintr -e 'lintr::lint_package()'
             '''
           }
