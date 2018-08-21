@@ -48,11 +48,13 @@ spec:
   containers:
   - name: r
     image: registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/ds/rocker/packrat:3.5.0
+    imagePullPolicy: IfNotPresent
     command:
     - cat
     tty: true
   - name: jnlp
-    image: registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/jnlp-slave
+    image: registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/jnlp-slave:latest
+    imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /var/run/docker.sock
       name: docker-sock
