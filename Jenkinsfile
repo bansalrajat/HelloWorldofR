@@ -104,7 +104,6 @@ spec:
               env.COMPONENT_NAME = 'mip-r-hello-world-model'
           }
           sh '''
-            cd Arithmetics
             Rscript -e "devtools::build()"
           '''
         }
