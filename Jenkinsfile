@@ -118,7 +118,10 @@ spec:
               echo "Check style"
 
               Rscript --default-packages=lintr -e 'lintr::lint_package()'
-              Rscript --default-packages=lintr -e 'devtools::test()'
+              Rscript --default-packages=lintr -e 'rcmdcheck::rcmdcheck()'
+              Rscript --default-packages=lintr -e 'covr::package_coverage()'
+              Rscript --default-packages=lintr -e 'cyclocomp::cyclocomp_package()'
+              
              # Rscript --default-packages=lintr -e 'lintr::lint_package()'
               
             '''
