@@ -15,8 +15,4 @@ RUN R -e 'install.packages("spatial" , repos="http://cran.us.r-project.org")'
 RUN R -e 'install.packages("mgcv" , repos="http://cran.us.r-project.org")'
 RUN R -e 'install.packages("covr" , repos="http://cran.us.r-project.org")'
 RUN R -e 'install.packages("cyclocomp" , repos="http://cran.us.r-project.org")'
-
-
-FROM dependencies AS build
-
-RUN R --default-packages=lintr -e 'lintr::lint_package()'
+RUN R -e 'install.packages("roxygen2" , repos="http://cran.us.r-project.org")'
