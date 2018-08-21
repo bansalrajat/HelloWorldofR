@@ -118,6 +118,9 @@ spec:
               echo "Check style"
 
               Rscript --default-packages=lintr -e 'lintr::lint_package()'
+              Rscript --default-packages=lintr -e 'devtools::test()'
+             # Rscript --default-packages=lintr -e 'lintr::lint_package()'
+              
             '''
           }
         }
