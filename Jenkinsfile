@@ -127,6 +127,8 @@ spec:
              # Rscript --default-packages=lintr -e 'lintr::lint_package()'
               
             '''
+            publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, includes: '**/*html', keepAll: true, reportDir: '.', reportFiles: 'Linting.html', reportName: 'HTML Report', reportTitles: ''])
+
           }
         }
       }
