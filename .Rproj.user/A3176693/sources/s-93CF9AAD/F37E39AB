@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1534851721806.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F37E39AB",
+    "lastKnownWriteTime" : 1534758496,
+    "last_content_update" : 1534758496,
+    "path" : "~/projects/HelloWorldofR/R/Addition.R",
+    "project_path" : "R/Addition.R",
+    "properties" : {
+        "cursorPosition" : "0,18",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
