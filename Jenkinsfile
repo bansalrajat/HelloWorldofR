@@ -109,6 +109,19 @@ spec:
         }
       }
     }
+    stage('Check style') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('jnlp') {
+            sh '''
+              echo "Check style"
+              Rscript --default-packages==lintr -e 'lintr::lint_package()'
+            '''
+          }
+        }
+      }
+    }
+
 
     stage('Push package to Nexus') {
       steps{
