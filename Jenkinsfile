@@ -130,7 +130,15 @@ spec:
              # Rscript --default-packages=lintr -e 'lintr::lint_package()'
               
             '''
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/*.html', keepAll: true, reportDir: '.', reportFiles: 'Linting.html , Coverage.html', reportName: 'HTML Report', reportTitles: ''])
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: true, 
+             reportDir: '.', 
+             reportFiles: 'Linting.html , Coverage.html , Rcmdcheck.html', 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
 
           }
         }
