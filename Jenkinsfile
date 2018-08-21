@@ -103,7 +103,7 @@ spec:
           container('jnlp') {
             sh '''
               echo "Check style"
-              Rscript -e 'lintr::lint_package()'
+              Rscript --default-packages=lintr -e 'lintr::lint_package()'
             '''
           }
         }
