@@ -116,6 +116,7 @@ spec:
           container('r') {
             sh '''
               echo "Check style"
+              Rscript -e "install.packages('lintr')"
               Rscript --default-packages=lintr -e 'lintr::lint_package()'
             '''
           }
