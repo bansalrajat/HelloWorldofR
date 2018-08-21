@@ -117,10 +117,10 @@ spec:
             sh '''
               echo "Check style"
 
-              Rscript --default-packages=lintr -e 'lintr::lint_package()'
-              Rscript --default-packages=lintr -e 'rcmdcheck::rcmdcheck()'
-              Rscript --default-packages=lintr -e 'covr::package_coverage()'
-              Rscript --default-packages=lintr -e 'cyclocomp::cyclocomp_package()'
+              Rscript  -e 'lintr::lint_package()'
+              Rscript  -e 'rcmdcheck::rcmdcheck()'
+              Rscript  -e 'covr::package_coverage()'
+              Rscript  -e 'cyclocomp::cyclocomp_package(".")'
               
              # Rscript --default-packages=lintr -e 'lintr::lint_package()'
               
