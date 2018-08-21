@@ -120,6 +120,7 @@ spec:
               #Rscript  -e 'lintr::lint_package()'
               Rscript  -e "rmarkdown::render('Linting.Rmd')"
               Rscript  -e "rmarkdown::render('Coverage.Rmd')"
+              Rscript  -e "rmarkdown::render('Rcmdcheck.Rmd')"
               
               #Rscript  -e 'rcmdcheck::rcmdcheck()'
               #Rscript  -e 'covr::package_coverage()'
