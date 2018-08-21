@@ -17,3 +17,4 @@ RUN R -e 'install.packages("covr" , dependencies=T  , repos="http://cran.us.r-pr
 RUN R -e 'install.packages("cyclocomp" , dependencies=T  , repos="http://cran.us.r-project.org")'
 RUN R -e 'install.packages("roxygen2" , dependencies=T  , repos="http://cran.us.r-project.org")'
 RUN R -e 'install.packages("rcmdcheck" , dependencies=T  , repos="http://cran.us.r-project.org")'
+RUN R -e 'install.packages("rmarkdown" , dependencies=T  , repos="http://cran.us.r-project.org")'
