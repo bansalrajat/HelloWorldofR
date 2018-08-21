@@ -113,7 +113,7 @@ spec:
     stage('Linting') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
-          container('jnlp') {
+          container('r') {
             sh '''
               echo "Check style"
               Rscript --default-packages==lintr -e 'lintr::lint_package()'
