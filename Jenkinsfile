@@ -97,18 +97,7 @@ spec:
       }
     }
 
-    stage('Check style') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('jnlp') {
-            sh '''
-              echo "Check style"
-              Rscript -e 'lintr::lint_package()'
-            '''
-          }
-        }
-      }
-    }
+    
 
     stage('Generate Model generator package') {
       steps {
@@ -119,6 +108,18 @@ spec:
           sh '''
             Rscript -e "devtools::build()"
           '''
+        }
+      }
+    }
+    stage('Check style') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('jnlp') {
+            sh '''
+              echo "Check style"
+              Rscript -e 'lintr::lint_package()'
+            '''
+          }
         }
       }
     }
