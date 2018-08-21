@@ -1,0 +1,1 @@
+docker build . -t  registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/ds/rocker/packrat:latest
