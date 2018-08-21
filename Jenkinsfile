@@ -97,19 +97,6 @@ spec:
       }
     }
 
-    stage('Generate Model generator package') {
-      steps {
-        container('r') {
-          script {
-              env.COMPONENT_NAME = 'mip-r-hello-world-model'
-          }
-          sh '''
-            Rscript -e "devtools::build()"
-          '''
-        }
-      }
-    }
-
     stage('Linting') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
@@ -137,7 +124,7 @@ spec:
              includes: '**/*.html', 
              keepAll: true, 
              reportDir: '.', 
-             reportFiles: 'Linting.html , Coverage.html , Rcmdcheck.html , CycloComp.html', 
+             reportFiles: 'Linting.html', 
              reportName: 'HTML Report', reportTitles: ''
              ])
 
@@ -145,7 +132,84 @@ spec:
         }
       }
     }
+    stage('R CMD Check') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('r') {
+            sh '''
+              Rscript  -e "rmarkdown::render('Rcmdcheck.Rmd')"
+                
+            '''
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: true, 
+             reportDir: '.', 
+             reportFiles: 'Rcmdcheck.html', 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
 
+          }
+        }
+      }
+    }
+    stage('Package Coverage') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('r') {
+            sh '''
+              Rscript  -e "rmarkdown::render('Coverage.Rmd')"
+              
+            '''
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: true, 
+             reportDir: '.', 
+             reportFiles: 'Coverage.html', 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
+
+          }
+        }
+      }
+    }
+    stage('CycloMatic Complexity') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('r') {
+            sh '''
+              Rscript  -e "rmarkdown::render('CycloComp.Rmd')"
+                
+            '''
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: true, 
+             reportDir: '.', 
+             reportFiles: 'CycloComp.html', 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
+
+          }
+        }
+      }
+    }
+    stage('Generate Model generator package') {
+      steps {
+        container('r') {
+          script {
+              env.COMPONENT_NAME = 'mip-r-hello-world-model'
+          }
+          sh '''
+            Rscript -e "devtools::build()"
+          '''
+        }
+      }
+    }
 
     stage('Push package to Nexus') {
       steps{
