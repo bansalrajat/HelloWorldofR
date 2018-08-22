@@ -124,7 +124,8 @@ spec:
           container('r') {
             sh '''
               Rscript  -e "rmarkdown::render('reports/templates/Linting.Rmd' , output_dir = 'reports')"
-                
+              ls -ltr *
+              ls -ltr  reports 
             '''
             publishHTML([
              allowMissing: false,
