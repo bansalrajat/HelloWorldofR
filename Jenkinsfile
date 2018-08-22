@@ -118,8 +118,6 @@ spec:
         }
       }
     }
-    stage('Static Analysis'){
-    parallel {
     stage('Check Linting') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
@@ -141,71 +139,6 @@ spec:
           }
         }
       }
-    }
-
-    stage('Package Coverage') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('r') {
-            sh '''
-              Rscript  -e "rmarkdown::render('reports/templates/Coverage.Rmd' , output_dir = 'reports')"
-             
-             '''
-            publishHTML([
-             allowMissing: false,
-             alwaysLinkToLastBuild: false,
-             includes: '**/*', 
-             keepAll: true, 
-             reportDir: 'reports', 
-             reportFiles: Coverage.html, 
-             reportName: 'HTML Report', reportTitles: ''
-             ])
-
-          }
-        }
-      }
-    }
-    } 
-    }
-    stage('Quality Checks'){
-    parallel {
-    stage('Quality Check') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('r') {
-            sh '''
-              R CMD CHECK . --no-manual
-             
-             '''
-            }
-        }
-      }
-    }
-    stage('Cyclomatic Complexity') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('r') {
-            sh '''
-              Rscript  -e "rmarkdown::render('reports/templates/CycloComp.Rmd' , output_dir = 'reports')"
-             
-             '''
-            publishHTML([
-             allowMissing: false,
-             alwaysLinkToLastBuild: false,
-             includes: '**/*', 
-             keepAll: true, 
-             reportDir: 'reports', 
-             reportFiles: CycloComp.html, 
-             reportName: 'HTML Report', reportTitles: ''
-             ])
-
-          }
-        }
-      }
-    }
-
-}
-
     }
 
     stage('Generate Model generator package') {
@@ -258,37 +191,7 @@ spec:
       }
     }
 
-    stage('Check style') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('jnlp') {
-            sh '''
-              echo "Check style"
-              #Rscript -e 'lintr::lint_package()'
-            '''
-          }
-        }
-      }
-    }
-
-    stage('Analyse code quality') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('jnlp') {
-            sh '''
-              sonar-scanner -v
-              #sonar-scanner -Dsonar.projectKey=mip-r-hello-world \
-              #-Dsonar.sources=. \
-              #-Dsonar.host.url=http://sonarqube-platform-sonarqube:9000
-            '''
-
-            script {
-              env.DEPLOY_TO_DEV = true
-            }
-          }
-        }
-      }
-    }
+    
 
     stage('Analyse code security') {
       when {
