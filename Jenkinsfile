@@ -118,7 +118,8 @@ spec:
         }
       }
     }
-    parallel{
+    stage('Static Analysis'){
+    parallel {
     stage('Check Linting') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
@@ -164,9 +165,10 @@ spec:
         }
       }
     }
-
+    } 
     }
-    parallel{
+    stage('Quality Checks'){
+    parallel {
     stage('Quality Check') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
@@ -202,7 +204,7 @@ spec:
       }
     }
 
-
+}
 
     }
 
