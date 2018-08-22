@@ -129,7 +129,7 @@ spec:
             publishHTML([
              allowMissing: false,
              alwaysLinkToLastBuild: false,
-             includes: '**/*', 
+             includes: '**/*.html', 
              keepAll: false, 
              reportDir: 'reports', 
              reportFiles: 'Linting.html', 
