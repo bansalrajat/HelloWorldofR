@@ -127,7 +127,7 @@ spec:
               ls -ltr *
               ls -ltr  reports 
             '''
-           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/*.html', keepAll: false, reportDir: 'reports', reportFiles: 'Linting.html', reportName: 'HTML Report', reportTitles: ''])
+           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/*.html', keepAll: false, reportDir: 'reports/', reportFiles: 'Linting.html', reportName: 'HTML Report', reportTitles: ''])
 
 
           }
