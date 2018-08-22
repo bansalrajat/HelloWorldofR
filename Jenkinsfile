@@ -125,16 +125,16 @@ spec:
         timeout(time: 10, unit: 'MINUTES') {
           container('r') {
             sh '''
-              Rscript  -e "rmarkdown::render('reports/templates/Linting.Rmd')"
+              Rscript  -e "rmarkdown::render('reports/templates/Linting.Rmd' , output_dir = 'reports')"
                 
             '''
             publishHTML([
              allowMissing: false,
              alwaysLinkToLastBuild: false,
-             includes: '**/*.html', 
-             keepAll: true, 
-             reportDir: '.', 
-             reportFiles: 'reports/Linting.html', 
+             includes: '**/*', 
+             keepAll: false, 
+             reportDir: 'reports', 
+             reportFiles: 'Linting.html', 
              reportName: 'HTML Report', reportTitles: ''
              ])
 
@@ -148,16 +148,16 @@ spec:
         timeout(time: 10, unit: 'MINUTES') {
           container('r') {
             sh '''
-              Rscript  -e "rmarkdown::render('reports/templates/Coverage.Rmd')"
+              Rscript  -e "rmarkdown::render('reports/templates/Coverage.Rmd' , output_dir = 'reports')"
              
              '''
             publishHTML([
              allowMissing: false,
              alwaysLinkToLastBuild: false,
-             includes: '**/*.html', 
+             includes: '**/*', 
              keepAll: true, 
-             reportDir: '.', 
-             reportFiles: reports/Coverage.html, 
+             reportDir: 'reports', 
+             reportFiles: Coverage.html, 
              reportName: 'HTML Report', reportTitles: ''
              ])
 
@@ -186,7 +186,7 @@ spec:
         timeout(time: 10, unit: 'MINUTES') {
           container('r') {
             sh '''
-              Rscript  -e "rmarkdown::render('reports/templates/Coverage.Rmd')"
+              Rscript  -e "rmarkdown::render('reports/templates/CycloComp.Rmd' , output_dir = 'reports')"
              
              '''
             publishHTML([
@@ -194,8 +194,8 @@ spec:
              alwaysLinkToLastBuild: false,
              includes: '**/*', 
              keepAll: true, 
-             reportDir: '.', 
-             reportFiles: reports/Coverage.html, 
+             reportDir: 'reports', 
+             reportFiles: CycloComp.html, 
              reportName: 'HTML Report', reportTitles: ''
              ])
 
