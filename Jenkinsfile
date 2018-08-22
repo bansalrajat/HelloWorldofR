@@ -97,15 +97,46 @@ spec:
       }
     }
 
-    stage('Linting') {
+    stage('Unit Tests') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('r') {
+            sh '''
+              echo "Check style"
+              Rscript -e 'devtools::test()'
+              #Rscript  -e 'lintr::lint_package()'
+              Rscript  -e "rmarkdown::render('reports/templates/Linting.Rmd')"
+              Rscript  -e "rmarkdown::render('reports/templates/Coverage.Rmd')"
+              Rscript  -e "rmarkdown::render('reports/templates/Rcmdcheck.Rmd')"
+              Rscript  -e "rmarkdown::render('reports/templates/CycloComp.Rmd')"
+              
+              #Rscript  -e 'rcmdcheck::rcmdcheck()'
+              #Rscript  -e 'covr::package_coverage()'
+              #Rscript  -e 'cyclocomp::cyclocomp_package(".")'
+              #Rscript --default-packages=lintr -e 'lintr::lint_package()'
+              
+            '''
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: true, 
+             reportDir: '.', 
+             reportFiles: 'Linting.html , Coverage.html , Rcmdcheck.html , CycloComp.html', 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
+
+          }
+        }
+      }
+    }
+    stage('Package Coverage') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
           container('r') {
             sh '''
               echo "Check style"
 
-              #Rscript  -e 'lintr::lint_package()'
-              Rscript  -e "rmarkdown::render('Linting.Rmd')"
               Rscript  -e "rmarkdown::render('Coverage.Rmd')"
               Rscript  -e "rmarkdown::render('Rcmdcheck.Rmd')"
               Rscript  -e "rmarkdown::render('CycloComp.Rmd')"
@@ -124,7 +155,7 @@ spec:
              includes: '**/*.html', 
              keepAll: true, 
              reportDir: '.', 
-             reportFiles: 'Linting.html', 
+             reportFiles: 'Linting.html , Coverage.html , Rcmdcheck.html , CycloComp.html', 
              reportName: 'HTML Report', reportTitles: ''
              ])
 
@@ -132,72 +163,7 @@ spec:
         }
       }
     }
-    stage('R CMD Check') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('r') {
-            sh '''
-              Rscript  -e "rmarkdown::render('Rcmdcheck.Rmd')"
-                
-            '''
-            publishHTML([
-             allowMissing: false,
-             alwaysLinkToLastBuild: false,
-             includes: '**/*.html', 
-             keepAll: true, 
-             reportDir: '.', 
-             reportFiles: 'Rcmdcheck.html', 
-             reportName: 'HTML Report', reportTitles: ''
-             ])
 
-          }
-        }
-      }
-    }
-    stage('Package Coverage') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('r') {
-            sh '''
-              Rscript  -e "rmarkdown::render('Coverage.Rmd')"
-              
-            '''
-            publishHTML([
-             allowMissing: false,
-             alwaysLinkToLastBuild: false,
-             includes: '**/*.html', 
-             keepAll: true, 
-             reportDir: '.', 
-             reportFiles: 'Coverage.html', 
-             reportName: 'HTML Report', reportTitles: ''
-             ])
-
-          }
-        }
-      }
-    }
-    stage('CycloMatic Complexity') {
-      steps {
-        timeout(time: 10, unit: 'MINUTES') {
-          container('r') {
-            sh '''
-              Rscript  -e "rmarkdown::render('CycloComp.Rmd')"
-                
-            '''
-            publishHTML([
-             allowMissing: false,
-             alwaysLinkToLastBuild: false,
-             includes: '**/*.html', 
-             keepAll: true, 
-             reportDir: '.', 
-             reportFiles: 'CycloComp.html', 
-             reportName: 'HTML Report', reportTitles: ''
-             ])
-
-          }
-        }
-      }
-    }
     stage('Generate Model generator package') {
       steps {
         container('r') {

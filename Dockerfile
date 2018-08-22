@@ -1,20 +1,3 @@
-FROM registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/ds/rocker/packrat:3.5.0 AS dependencies
+FROM registry-proxy.lbg.eu-gb.mybluemix.net/modelmaker/ds/rocker/packrat:3.5.0
 
-RUN R -e 'install.packages("lintr" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("MASS" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("nlme" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("survival" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("boot" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("cluster" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("foreign" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("KernSmooth" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("rpart" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("class" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("nnet" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("spatial" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("mgcv" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("covr" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("cyclocomp" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("roxygen2" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("rcmdcheck" , dependencies=T  , repos="http://cran.us.r-project.org")'
-RUN R -e 'install.packages("rmarkdown" , dependencies=T  , repos="http://cran.us.r-project.org")'
+RUN R -e 'install.packages(c("lintr"  ,"MASS" ,"nlme" ,"survival" ,"boot" ,"cluster" ,"foreign" ,"KernSmooth","rpart","class","nnet" ,"spatial" ,"mgcv" ,"covr" ,"cyclocomp" ,"roxygen2" ,"rcmdcheck" ,"rmarkdown" ))'
