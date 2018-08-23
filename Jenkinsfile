@@ -126,7 +126,8 @@ spec:
               Rscript  -e "rmarkdown::render('reports/templates/Linting.Rmd' , output_dir = 'reports')"
               ls -ltr *
               ls -ltr  reports 
-              R CMD CHECK . --no-manual
+
+              `which R` CMD CHECK . --no-manual
             '''
            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/*.html', keepAll: false, reportDir: 'reports/', reportFiles: 'Linting.html', reportName: 'HTML Report', reportTitles: ''])
 
