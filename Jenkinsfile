@@ -127,7 +127,7 @@ spec:
               ls -ltr *
               ls -ltr  reports 
 
-              `which R` CMD CHECK . --no-manual
+              `which R` CMD check . --no-manual
             '''
            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/*.html', keepAll: false, reportDir: 'reports/', reportFiles: 'Linting.html', reportName: 'HTML Report', reportTitles: ''])
 
