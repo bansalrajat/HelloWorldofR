@@ -118,25 +118,56 @@ spec:
         }
       }
     }
+   
+    stage('Static Analysis'){
+    parallel {
     stage('Check Linting') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
           container('r') {
             sh '''
               Rscript  -e "rmarkdown::render('reports/templates/Linting.Rmd' , output_dir = 'reports')"
-              ls -ltr *
-              ls -ltr  reports 
-
-              `which R` CMD check . --no-manual
+                
             '''
-           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/*.html', keepAll: false, reportDir: 'reports/', reportFiles: 'Linting.html', reportName: 'HTML Report', reportTitles: ''])
-
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: false, 
+             reportDir: 'reports', 
+             reportFiles: 'Linting.html', 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
 
           }
         }
       }
     }
 
+    stage('Package Coverage') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          container('r') {
+            sh '''
+              Rscript  -e "rmarkdown::render('reports/templates/Coverage.Rmd' , output_dir = 'reports')"
+             
+             '''
+            publishHTML([
+             allowMissing: false,
+             alwaysLinkToLastBuild: false,
+             includes: '**/*.html', 
+             keepAll: true, 
+             reportDir: 'reports', 
+             reportFiles: Coverage.html, 
+             reportName: 'HTML Report', reportTitles: ''
+             ])
+
+          }
+        }
+      }
+    }
+    } 
+    }
     stage('Generate Model generator package') {
       steps {
         container('r') {
